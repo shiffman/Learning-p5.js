@@ -1,0 +1,15 @@
+@import 'shared';
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+img {
+  max-width: 100%;
+}
+
+a[data-type='indexterm'] {
+  display: none;
+}
