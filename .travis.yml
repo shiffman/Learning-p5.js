@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "8.1"
+before_script:
+  - npm install -g magicbook
+script:
+  - magicbook build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: build/html/
+  on:
+    branch: master
