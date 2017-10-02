@@ -222,7 +222,15 @@
   	<li><p>Move car object.</p></li>
   </ul>
 
-  <p>Notice I removed all of the global variables from the first example. Instead of having separate variables for car color, car location, and car speed, I now have only one variable, a <code>Car</code> variable! And instead of initializing those three variables, I initialize one thing, the <code>Car</code> object. Where did those variables go? They still exist, only now they live inside of the <code>Car</code> object (and will be defined in the <code>Car</code> class, which I will get to in a moment).</p>
+  <p>
+    Notice I removed all of the global variables from the first example.
+    Instead of having separate variables for color, location, car
+    speed, I now have only one variable, a car object! And
+    instead of initializing those three variables, I initialize one thing,
+    the car itself. Where did those variables go? They still
+    exist, only now they live inside of the car object (and will
+    be defined in the <code>Car</code> class, which I will get to in a moment).
+  </p>
 
   <p>Moving beyond pseudocode, the actual body of the sketch might look like:</p>
 
@@ -252,19 +260,77 @@
   <p><a data-type="xref" href='#ch08fig01'>#ch08fig01</a> shows how you can take the elements from a simple non-object-oriented sketch and place them into a <code>Car</code> class, from which you will then be able to make <code>Car</code> objects.</p>
 
   <ul>
-  	<li><p><strong>The Class Name</strong> — The name<a contenteditable="false" data-primary="class name" data-type="indexterm">&nbsp;</a> is specified by “class WhateverNameYouChoose”. You then enclose all of the code for the class inside curly brackets after the name declaration. Class names are traditionally capitalized (to distinguish them from variable names, which traditionally are lowercase).</p></li>
-  	<li><p><strong>Data</strong> — The data<a contenteditable="false" data-primary="class data" data-type="indexterm">&nbsp;</a> for a class is a collection of variables. These variables are often referred to as <em>instance</em> variables since each <em>instance</em> of an object contains this set of variables. NOTE: MENTION "THIS"</p></li>
-  	<li><p><strong>A Constructor</strong> — The <a contenteditable="false" data-primary="constructor(s)" data-type="indexterm">&nbsp;</a><a contenteditable="false" data-primary="setup() function" data-type="indexterm">&nbsp;</a>constructor is a special function inside of a class that creates the instance of the object itself. It’s where you give the instructions on how to set up the object. It’s just like p5's <code>setup()</code> function, only here it’s used to create an individual object within the sketch, whenever a <code>new</code> object is created from this <em>class</em>. It always named <code>constructor</code> and is called by invoking the <code>new</code> operator: “<code>Car myCar</code> = <code>new Car();</code>”.</p></li>
-  	<li><p><strong>Functionality</strong> — We<a contenteditable="false" data-primary="functionality" data-type="indexterm">&nbsp;</a><a contenteditable="false" data-primary="functionality" data-secondary="class" data-type="indexterm">&nbsp;</a> can add functionality to an object by writing methods. These are done in the same way as described in <a data-type="xref" href="#functions">#functions</a>, with a return type, name, arguments, and a body of code.</p></li>
+  	<li>
+      <p><strong>The Class Name</strong> — The name<a contenteditable="false" data-primary="class name" data-type="indexterm">&nbsp;</a>
+      is specified by “class WhateverNameYouChoose”. You then enclose all of the
+      code for the class inside curly brackets after the name declaration. Class
+      names are traditionally capitalized (to distinguish them from variable
+      names, which traditionally are lowercase).
+      </p>
+    </li>
+  	<li>
+      <p><strong>Data</strong> — The data
+      <a contenteditable="false" data-primary="class data" data-type="indexterm">&nbsp;</a>
+      for a class is a collection of variables. These variables are often
+      referred to as <em>instance</em> variables since each <em>instance</em>
+      of an object contains this set of variables.
+      </p>
+    </li>
+  	<li><p><strong>A Constructor</strong> — The
+      <a contenteditable="false" data-primary="constructor(s)" data-type="indexterm">&nbsp;</a><a contenteditable="false" data-primary="setup() function" data-type="indexterm">&nbsp;</a>constructor is a special function inside of a class that creates the instance of the object itself. It’s where you give the instructions on how to set up the object. It’s just like p5's <code>setup()</code> function, only here it’s used to create an individual object within the sketch, whenever a <code>new</code> object is created from this <em>class</em>. It always
+      named <code>constructor</code> and is called by invoking the <code>new</code>
+      operator: <code>let myCar = new Car();</code>.</p></li>
+  	<li><p><strong>Functionality</strong> — We
+      <a contenteditable="false" data-primary="functionality" data-type="indexterm">&nbsp;</a>
+      <a contenteditable="false" data-primary="functionality" data-secondary="class" data-type="indexterm">&nbsp;</a>
+      can add functionality to an object by writing methods. These are done in
+      the same way as described in
+      <a data-type="xref" href="#functions">#functions</a>, with a return
+      type, name, arguments, and a body of code.</p></li>
   </ul>
 
   <p>This code for a <em>class</em> exists as its own block and can be placed anywhere outside of <code>setup()</code> and <code>draw()</code>.</p>
 
-  <p>NOTE: NEED TO EXPLAIN THIS!</p>
-
   <figure class="no-rule" id="ch08fig01"><img alt="fig 8.1" src="fig_08_01_OOP_diagram.png"/>
   <figcaption> </figcaption>
   </figure>
+
+  <p>
+    You might have noticed something a bit strange that changed moving from
+    global variables <code>x</code>, <code>y</code>, etc. On the right of
+    <a data-type="xref" href='#ch08fig01'>#ch08fig01</a> the variables are
+    declated as you might normally expect.
+  </p>
+
+  <pre data-type="programlisting">
+  let xpos = width/2;
+  let ypos = height/2;
+  </pre>
+
+  <p>
+    However, in the constructor function, the variables are declared with a new
+    keyword: <code>this</code>.
+  </p>
+
+  <pre data-type="programlisting">
+    constructor() {
+      this.xpos = width/2;
+      this.ypos = height/2;
+    }
+  </pre>
+
+  <p>
+    The <code>this</code> keyword is only going to come up again and again in
+    JavaScript and what it means and what it is doing are particularly tricky
+    to grasp. You might think of <code>this</code> in the broadest sense as
+    meaning "context." Where are we and why are we here on this line of code?
+    I'll get to <em>this</em> more in other chapters. Here, however, the
+    <em>context</em> is the class itself! And <code>this</code> refers to the
+    new object being created by the constructor. And this new object needs
+    properties! So when new variables are declared inside a class to be attached
+    to an object instance of that class, they are declared with <code>this</code>
+    rather than <code>let</code>.
+  </p>
 
   <aside data-type="sidebar" id="class_is_a_new_block_of_codeexclamation">
   <h5>A class is a new block of code!</h5>
