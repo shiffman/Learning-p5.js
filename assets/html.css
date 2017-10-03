@@ -1,0 +1,49 @@
+body {
+  font-family: "Helvetica", "Arial", sans-serif;
+  color: #333; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('Roboto-Bold.eot');
+  src: url('Roboto-Bold.eot?#iefix') format("embedded-opentype"), url('Roboto-Bold.woff') format("woff"), url('Roboto-Bold.ttf') format("truetype"), url('Roboto-Bold.svg#robotobold') format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Roboto'; }
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: justify; }
+
+img {
+  max-width: 100%; }
+
+a[data-type='indexterm'] {
+  display: none; }
+
+.codesplit {
+  background: #F0F0F0; }
+  .codesplit .pair .comment {
+    background-color: #DDD;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    float: right;
+    width: 40%; }
+    .codesplit .pair .comment p {
+      margin: 0; }
+  .codesplit .pair:last-child .comment {
+    margin-bottom: 0; }
+  .codesplit .pair .code pre {
+    margin: 0; }
+  .codesplit .pair:not(.no-comment) .code pre code {
+    background-color: #DDD; }
+  .codesplit .pair:not(.no-comment)::before {
+    clear: both;
+    content: "";
+    display: block; }
+  .codesplit .pairs::after {
+    clear: both;
+    content: "";
+    display: block; }

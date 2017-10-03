@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Learning p5.js</title>
+    
+    <link rel="stylesheet" href="assets/html.css">
+
+  </head>
+  <body data-type="book">
+    <div class="container">
+      <section data-type="chapter" id="objects">
+  <h1>Objects</h1>
+
+  <blockquote data-type="epigraph">
+    <p>
+      <em>
+        No object is so beautiful that, under certain conditions, it will not
+        look ugly.
+      </em>
+    </p>
+
+    <p data-type="attribution">&#x2014;Oscar Wilde</p>
+  </blockquote>
+
+  <div class="chaptertoc">
+    <p>In this chapter:</p>
+
+    <ul type="dash">
+    	<li><p>Data and functionality, together at last</p></li>
+    	<li><p>What is an object?</p></li>
+    	<li><p>What is a class?</p></li>
+    	<li><p>Writing your own classes</p></li>
+    	<li><p>Creating your own objects</p></li>
+    	<li><p>Processing tabs</p></li>
+    </ul>
+  </div>
+
+  <section data-type="sect1" id="iapostrophem_down_with_oopdot">
+    <h1>I&#x2019;m down with OOP</h1>
+
+    <p>
+      <a data-type="indexterm" data-primary="object(s)" id="ch08.html0">&#xA0;</a>
+      <a data-type="indexterm" data-primary="object(s)" data-secondary="conceptual discussion of">&#xA0;</a>
+      <a data-type="indexterm" data-primary="Wilde, Oscar">&#xA0;</a>
+      Before I begin discussing thedetails of how object-oriented programming
+      (OOP) works in Processing, let&#x2019;s embark on a short conceptual discussion of
+      &#x201C;objects&#x201D; themselves. It&#x2019;s important to understand that I am not introducing
+      any new programming fundamentals. Objects use everything you have already
+      learned: variables, conditional statements, loops, functions, and so on.
+      What is entirely new, however, is a way of thinking, a way of structuring
+      and organizing everything you have already learned.
+    </p>
+
+    <p>
+      Imagine you were not programming in JavaScript with p5.js, but were instead
+      writing out a program for your day, a list of instructions, if you will.
+      It might start out something like:
+    </p>
+
+    <ul>
+    	<li><p>Wake up.</p></li>
+    	<li><p>Drink coffee (or tea).</p></li>
+    	<li><p>Eat breakfast: cereal, blueberries, and soy milk.</p></li>
+    	<li><p>Ride the subway.</p></li>
+    </ul>
+
+    <p>
+      What is involved here? Specifically, what <em>things</em> are involved?
+      First, although it may not be immediately apparent from how I wrote the
+      above instructions, the main thing is <em>you</em>, a human being, a person.
+      You exhibit certain properties. You look a certain way; perhaps you have
+      brown hair, wear glasses, and appear slightly nerdy. You also have the
+      ability to do stuff, such as wake up (presumably you can also sleep), eat,
+      or ride the subway. An object is just like you, a thing that has properties
+      and can do stuff.
+    </p>
+
+    <p>
+      So how does this relate to programming? The properties of an object are
+      variables; and the stuff an object can do are functions. Object-oriented
+      programming is the marriage of everything I covered in
+      <a data-type="xref" href="#pixels">#pixels</a> through
+      <a data-type="xref" href="#functions">#functions</a>; data and
+      functionality, all rolled into one <em>thing</em>.
+    </p>
+
+    <p class="pagebreak-before">
+      Let&#x2019;s map out the data and functions for a very simple human object:
+    </p>
+
+    <aside data-type="sidebar" id="human_data">
+    <h5>Human data</h5>
+
+    <ul>
+    	<li><p>Height.</p></li>
+    	<li><p>Weight.</p></li>
+    	<li><p>Eye color.</p></li>
+    	<li><p>Hair color.</p></li>
+    </ul>
+    </aside>
+
+    <aside data-type="sidebar" id="human_functions">
+    <h5>Human functions</h5>
+
+    <ul>
+    	<li><p>Sleep.</p></li>
+    	<li><p>Wake up.</p></li>
+    	<li><p>Eat.</p></li>
+    	<li><p>Ride some form of transportation.</p></li>
+    </ul>
+    </aside>
+
+    <p>
+      <a data-type="indexterm" data-primary="class(es)">&#xA0;</a>
+      <a data-type="indexterm" data-primary="class(es)" data-secondary="objects vs.">&#xA0;</a>
+      <a data-type="indexterm" data-primary="objects">&#xA0;</a>
+      Now, before I get too much further, I need to embark on a brief metaphysical
+      digression. The above structure is not a human being itself; it simply
+      describes the idea, or the concept, behind a human being. It describes
+      what it is to be human. To be human is to have height, hair, to sleep,
+      to eat, and so on. This is a crucial distinction for programming objects.
+      This human being template is known as a <em>class</em>. A <em>class</em>
+      is different from an <em>object</em>. You are an object. I am an object.
+      The person next to you on the subway is an object. Ada Lovelace is an
+      object. We are all people, real world <em>instances</em> of the idea of a
+      human being.
+    </p>
+
+    <p>
+      Think of a cookie cutter. A cookie cutter makes cookies, but it is not a
+      cookie itself. The cookie cutter is the <em>class</em>, the cookies are
+      the <em>objects</em>.
+    </p>
+
+    <aside class="exercise" data-type="sidebar" id="consider_a_car_as_an_objectdot_what_data">
+      <h5><em>Consider a car as an object. What data would a car have? What functions would it have?</em></h5>
+
+      <table class="no-border">
+      	<tbody>
+      		<tr>
+      			<th>Car data</th>
+      			<th>Car functions</th>
+      		</tr>
+      		<tr>
+      			<td><p>&#xA0;</p><code>_________________________________</code></td>
+            <td><p>&#xA0;</p><code>_________________________________</code></td>
+      		</tr>
+      		<tr>
+            <td><p>&#xA0;</p><code>_________________________________</code></td>
+            <td><p>&#xA0;</p><code>_________________________________</code></td>
+      		</tr>
+      		<tr>
+            <td><p>&#xA0;</p><code>_________________________________</code></td>
+            <td><p>&#xA0;</p><code>_________________________________</code></td>
+      		</tr>
+      		<tr>
+            <td><p>&#xA0;</p><code>_________________________________</code></td>
+            <td><p>&#xA0;</p><code>_________________________________</code></td>
+      		</tr>
+      		<tr>
+            <td><p>&#xA0;</p><code>_________________________________</code></td>
+            <td><p>&#xA0;</p><code>_________________________________</code></td>
+      		</tr>
+      	</tbody>
+      </table>
+    </aside>
+  </section>
+
+  <section data-type="sect1" id="using_an_object">
+  <h1>Using an object</h1>
+
+  <p>
+    <a data-type="indexterm" data-primary="object(s)" data-secondary="advantages of using">&#xA0;</a>
+    Before I look at the actual writing of a <em>class</em> itself, let&#x2019;s
+    briefly look at how using objects in the main program (i.e.,
+    <code>setup()</code> and <code>draw()</code>) makes the world a better place.
+  </p>
+
+  <p>
+    Returning to the car example from <a data-type="xref" href="#functions">#functions</a>,
+    you may recall that the pseudocode for the sketch looked something like this:
+  </p>
+
+  <p><strong><em>Data (Global Variables)</em></strong><strong>:</strong></p>
+
+  <ul>
+  	<li><p>Car color.</p></li>
+  	<li><p>Car x location.</p></li>
+  	<li><p>Car y location.</p></li>
+  	<li><p>Car x speed.</p></li>
+  </ul>
+
+  <p><strong><em>Setup</em></strong><strong>:</strong></p>
+
+  <ul>
+  	<li><p>Initialize car color.</p></li>
+  	<li><p>Initialize car location to starting point.</p></li>
+  	<li><p>Initialize car speed.</p></li>
+  </ul>
+
+  <p class="pagebreak-before"><strong><em>Draw</em></strong><strong>:</strong></p>
+
+  <ul>
+  	<li><p>Fill background.</p></li>
+  	<li><p>Display car at location with color.</p></li>
+  	<li><p>Increment car&#x2019;s location by speed.</p></li>
+  </ul>
+
+  <p>In <a data-type="xref" href="#functions">#functions</a>, I defined global variables at the top of the program, initialized them in <code>setup()</code>, and called <em>functions</em> to move and display the car in <code>draw()</code>.</p>
+
+  <p>Object-oriented programming allows me to take all of the variables and functions out of the main program and store them inside a car object. A car object will know about its data &#x2014; <em>color</em>, <em>location</em>, <em>speed</em>. That is part one. Part two of the car object is the stuff it can do, the methods (functions inside an object). The car can <em>move</em> and it can be <em>displayed</em>.</p>
+
+  <p>Using object-oriented design, the pseudocode improves to look something like this:</p>
+
+  <p><strong><em>Data (Global Variables)</em></strong><strong>:</strong></p>
+
+  <ul>
+  	<li><p>Car object.</p></li>
+  </ul>
+
+  <p><strong><em>Setup</em></strong><strong>:</strong></p>
+
+  <ul>
+  	<li><p>Initialize car object.</p></li>
+  </ul>
+
+  <p><strong><em>Draw</em></strong><strong>:</strong></p>
+
+  <ul>
+  	<li><p>Fill background.</p></li>
+  	<li><p>Display car object.</p></li>
+  	<li><p>Move car object.</p></li>
+  </ul>
+
+  <p>
+    Notice I removed all of the global variables from the first example.
+    Instead of having separate variables for color, location, car
+    speed, I now have only one variable, a car object! And
+    instead of initializing those three variables, I initialize one thing,
+    the car itself. Where did those variables go? They still
+    exist, only now they live inside of the car object (and will
+    be defined in the <code>Car</code> class, which I will get to in a moment).
+  </p>
+
+  <p>Moving beyond pseudocode, the actual body of the sketch might look like:</p>
+
+<div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>Variable to hold the object.</p></div><div class="code">
+
+<pre><code>let myCar;
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+function setup() {
+  myCar = new Car();
+}
+
+function draw() {
+  background(255);
+  myCar.move();
+  myCar.display();
+}
+
+</code></pre></div></div></div></div>
+  <p>I am going to get into the details regarding the previous code in a moment, but before I do so, let&#x2019;s take a look at how the <code>Car</code> <em>class</em> itself is written.</p>
+  </section>
+
+  <section data-type="sect1" id="writing_the_cookie_cutter">
+  <h1>Writing the cookie cutter</h1>
+
+  <p><a contenteditable="false" data-primary="class(es)" data-secondary="writing" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="object(s)" data-secondary="writing template for" data-type="indexterm">&#xA0;</a>The simple car example above demonstrates how the use of object in p5.js makes for clean, readable code. The hard work goes into writing the object template, that is the <em>class</em> itself. When you&#x2019;re first learning about object-oriented programming, it&#x2019;s often a useful exercise to take a program written without objects and, not changing the functionality at all, rewrite it using objects. I will do exactly this with the car example from <a data-type="xref" href="#functions">#functions</a>, recreating exactly the same look and behavior in an object-oriented manner. And at the end of the chapter, I will remake Zoog as an object.</p>
+
+  <p>All classes <a contenteditable="false" data-primary="class(es)" data-secondary="elements of" data-type="indexterm">&#xA0;</a>typically include four elements: <em>name</em>, <em>data</em>, <em>constructor</em>, and <em>methods</em>. (Technically, the only actual required element is the class name, but the point of doing object-oriented programming is to include all of these.)</p>
+
+  <p><a data-type="xref" href="ch08.html#ch08fig01">#ch08fig01</a> shows how you can take the elements from a simple non-object-oriented sketch and place them into a <code>Car</code> class, from which you will then be able to make <code>Car</code> objects.</p>
+
+  <ul>
+  	<li>
+      <p><strong>The Class Name</strong> &#x2014; The name<a contenteditable="false" data-primary="class name" data-type="indexterm">&#xA0;</a>
+      is specified by &#x201C;class WhateverNameYouChoose&#x201D;. You then enclose all of the
+      code for the class inside curly brackets after the name declaration. Class
+      names are traditionally capitalized (to distinguish them from variable
+      names, which traditionally are lowercase).
+      </p>
+    </li>
+  	<li>
+      <p><strong>Data</strong> &#x2014; The data
+      <a contenteditable="false" data-primary="class data" data-type="indexterm">&#xA0;</a>
+      for a class is a collection of variables. These variables are often
+      referred to as <em>instance</em> variables since each <em>instance</em>
+      of an object contains this set of variables.
+      </p>
+    </li>
+  	<li><p><strong>A Constructor</strong> &#x2014; The
+      <a contenteditable="false" data-primary="constructor(s)" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="setup() function" data-type="indexterm">&#xA0;</a>constructor is a special function inside of a class that creates the instance of the object itself. It&#x2019;s where you give the instructions on how to set up the object. It&#x2019;s just like p5&apos;s <code>setup()</code> function, only here it&#x2019;s used to create an individual object within the sketch, whenever a <code>new</code> object is created from this <em>class</em>. It always
+      named <code>constructor</code> and is called by invoking the <code>new</code>
+      operator: <code>let myCar = new Car();</code>.</p></li>
+  	<li><p><strong>Functionality</strong> &#x2014; We
+      <a contenteditable="false" data-primary="functionality" data-type="indexterm">&#xA0;</a>
+      <a contenteditable="false" data-primary="functionality" data-secondary="class" data-type="indexterm">&#xA0;</a>
+      can add functionality to an object by writing methods. These are done in
+      the same way as described in
+      <a data-type="xref" href="#functions">#functions</a>, with a return
+      type, name, arguments, and a body of code.</p></li>
+  </ul>
+
+  <p>This code for a <em>class</em> exists as its own block and can be placed anywhere outside of <code>setup()</code> and <code>draw()</code>.</p>
+
+  <figure class="no-rule" id="ch08fig01"><img alt="fig 8.1" src="assets/fig_08_01_OOP_diagram.png">
+  <figcaption> </figcaption>
+  </figure>
+
+  <p>
+    You might have noticed something a bit strange that changed moving from
+    global variables <code>x</code>, <code>y</code>, etc. On the left of
+    <a data-type="xref" href="ch08.html#ch08fig01">#ch08fig01</a> the variables are
+    declated as you might normally expect.
+  </p>
+  <!-- TODO -->
+  <div class="codesplit"><div class="pairs"><div class="pair no-comment"><div class="code">
+
+<pre><code>let xpos = width/2;
+let ypos = height/2;
+</code></pre></div></div></div></div>
+
+  <p>
+    However, in the constructor function, the variables are declared with a new
+    keyword: <code>this</code>.
+  </p>
+
+  <div class="codesplit"><div class="pairs"><div class="pair no-comment"><div class="code">
+
+<pre><code>constructor() {
+ this.xpos = width/2;
+ this.ypos = height/2;
+}
+</code></pre></div></div></div></div>
+
+  <p>
+    The <code>this</code> keyword is only going to come up again and again in
+    JavaScript and what it means and what it is doing are particularly tricky
+    to grasp. You might think of <code>this</code> in the broadest sense as
+    meaning &quot;context.&quot; Where are we and why are we here on this line of code?
+    I&apos;ll get to <em>this</em> more in other chapters. Here, however, the
+    <em>context</em> is the class itself! And <code>this</code> refers to the
+    new object being created by the constructor. And this new object needs
+    properties! So when new variables are declared inside a class to be attached
+    to an object instance of that class, they are declared with <code>this</code>
+    rather than <code>let</code>.
+  </p>
+
+  <aside data-type="sidebar" id="class_is_a_new_block_of_codeexclamation">
+  <h5>A class is a new block of code!</h5>
+
+  <pre data-type="programlisting">
+  function setup() {
+
+  }
+
+  function draw() {
+
+  }
+
+  <strong><span class="eight-point">class Car {
+
+  }</span></strong></pre>
+  </aside>
+
+  <aside class="exercise" data-type="sidebar" id="fill_in_the_blanks_in_the_following_huma">
+  <h5><em>Fill in the blanks in the following Human class definition. Include a function called</em> <code>sleep()</code> <em>or make up your own function. Follow the syntax of the Car example. (There are no right or wrong answers in terms of the actual code itself; it&#x2019;s the structure that is important.)</em></h5>
+
+  <pre data-type="programlisting">
+
+  ________ ______________ {
+
+    _______________________________ {
+
+      this.hairColor = _________________________________
+
+      this.height = _______________________
+    }
+
+    _______________________________ {
+
+      _____________________________________
+
+      _____________________________________
+    }
+  }</pre>
+  </aside>
+  </section>
+
+  <section data-type="sect1" id="using_an_object_the_details">
+  <h1>Using an object: the details</h1>
+
+  <p><a contenteditable="false" data-primary="object(s)" data-secondary="using" data-type="indexterm" id="ch08.html1">&#xA0;</a>In <a data-type="xref" href="ch08.html#using_an_object">#using_an_object</a>, I took a quick peek at how an object can greatly simplify the main parts of a Processing sketch (<code>setup()</code> and <code>draw()</code>).</p>
+
+<div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>Step 1: Declare an object.</p></div><div class="code">
+
+<pre><code>let myCar;
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+function setup() {
+</code></pre></div></div><div class="pair"><div class="comment"><p>Step 2: Initialize object.</p></div><div class="code">
+
+<pre><code>  myCar = new Car();
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>}
+
+function draw() {
+  background(255);
+</code></pre></div></div><div class="pair"><div class="comment"><p>Step 3: Call methods on the object.</p></div><div class="code">
+
+<pre><code>  myCar.move();
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>  myCar.display();
+}
+
+</code></pre></div></div></div></div>
+  <p>Let&#x2019;s look at the details behind the above three steps outlining how to use an object in your sketch.</p>
+
+  <section data-type="sect2" id="step_1dot_declaring_an_object_variabledo">
+  <h2>Step 1. Declaring an object variable.</h2>
+
+  <p><a contenteditable="false" data-primary="declaration" data-secondary="of object variable" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="object(s)" data-secondary="declaring variable for" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="variables" data-secondary="declaration" data-type="indexterm">&#xA0;</a>If you flip back to <a data-type="xref" href="#variables">#variables</a>, you may recall that a variable is declared with <em>let</em> followed by a <em>name</em>.</p>
+
+<div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>Variable declaration type name</p></div><div class="code">
+
+<pre><code>let something;   
+</code></pre></div></div></div></div>
+
+  <p>Previously we&apos;ve looked at <a contenteditable="false" data-primary="complex data types" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="primitive values" data-type="indexterm">&#xA0;</a> examples of variables that holds onto <em>primitives</em>, like a number.  Declaring a variable that holds onto an object is the same! Objects, incidentally, are not primitives and are considered <em>complex</em> data types. (This is because they store multiple pieces of information: data and functionality. Primitives only store data.)</p>
+  </section>
+
+  <section data-type="sect2" id="step_2dot_initializing_an_objectdot">
+  <h2>Step 2. Initializing an object.</h2>
+
+  <p><a contenteditable="false" data-primary="initialization" data-secondary="of objects" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="object(s)" data-secondary="initializing" data-type="indexterm">&#xA0;</a>Again, you may recall from <a data-type="xref" href="#variables">#variables</a> that in order to initialize a variable (i.e., give it a starting value), I use an assignment operation &#x2014; <em>variable</em> equals <em>something</em>.</p>
+
+  <h3>Variable Initialization</h3>
+<div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>something equals 10</p></div><div class="code">
+
+<pre><code>something = 10;   
+</code></pre></div></div></div></div>
+
+  <p>Initializing an object is a bit more complex. Instead of simply assigning it a primitive value, like an integer or floating point number, you have to construct the object. An object is made with the <code>new</code> operator.</p>
+
+  <h3>Object Initialization</h3>
+  <div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>The <code>new</code> operator is used to make a new object.</p></div><div class="code">
+
+<pre><code>myCar = new Car();
+ 
+</code></pre></div></div></div></div>
+
+  <p>In the above <a contenteditable="false" data-primary="constructor(s)" data-type="indexterm">&#xA0;</a>example, <code>myCar</code> is the object variable name and &#x201C;=&#x201D; indicates you are setting it equal to something, that something being a <code>new</code> instance of a <code>Car</code> object. What I am really doing here is initializing a <code>Car</code> object. When you initialize a primitive variable, such as an integer, you just set it equal to a number. But an object may contain multiple pieces of data. Recalling the <code>Car</code> class from the previous section, you can see that this line of code calls the <em>constructor</em> tfoot initializes all of the object&#x2019;s variables and makes sure the <code>Car</code> object is ready to go.</p>
+
+  <p>One other thing, if you forget to initialize the variable, p5.js will give it <a contenteditable="false" data-primary="null value" data-type="indexterm">&#xA0;</a>the value <code>undefined</code>. <code>undefined</code> means <em>nothing</em>. Not zero. Not negative one. Utter nothingness. Emptiness. If you encounter an error in the message window that says <code>Uncaught TypeError: Cannot read property &apos;_______&apos; of undefined</code> (and this is a pretty common error), that error is  likely caused by having forgotten to initialize an object. (See the Appendix for more details.)</p>
+  </section>
+
+  <section data-type="sect2" class="pagebreak-before" id="step_3dot_using_an_object">
+  <h2>Step 3. Using an object</h2>
+
+  <p>Once you have successfully declared and initialized an object variable, you can use it. Using an object involves calling functions that are built into that object. A human object can eat, a car can drive, a dog can bark. Functions that are inside of an object are technically referred to as &#x201C;methods&#x201D; so I can begin to use this nomenclature (see <a data-type="xref" href="#break_it_down">#break_it_down</a>). Calling a method inside of an object is accomplished via dot syntax:</p>
+
+  <ul type="nomark">
+  	<li>
+  	<p><strong>variableName.objectMethod(method arguments);</strong></p>
+  	</li>
+  </ul>
+
+  <p>In the case of the car, none of the available functions has an argument so it looks like:<a contenteditable="false" data-primary="" data-startref="ch08.html1" data-type="indexterm">&#xA0;</a></p>
+
+  <div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>Functions are called with the &#x201C;dot syntax.&#x201D;</p></div><div class="code">
+
+<pre><code>myCar.draw();
+myCar.display();
+</code></pre></div></div></div></div>
+
+  <aside class="exercise" data-type="sidebar" id="assume_the_existence_of_a_human_classdot">
+  <h5><em>Assume the existence of a Human class. You want to write the code to declare a Human object as well as call the function</em> <code>sleep()</code> <em>on that human object. Write out the code below:</em></h5>
+
+  <p><br><em>Declare and initialize the <code>Human</code> object:</em> <code>__________________________</code></p>
+
+  <p><br><em>Call the <code>sleep()</code> function:</em> <code>__________________________</code></p>
+
+  </aside>
+  </section>
+  </section>
+
+  <section data-type="sect1" id="putting_it_together_with_a_tab">
+  <h1>Putting it together with a new JavaScript file</h1>
+
+  <p><a contenteditable="false" data-primary="class(es)" data-secondary="tabs for" data-type="indexterm" id="ch08.html2">&#xA0;</a><a contenteditable="false" data-primary="object(s)" data-secondary="tabs for" data-type="indexterm" id="ch08.html3">&#xA0;</a><a contenteditable="false" data-primary="tabs, creating" data-type="indexterm" id="ch08.html4">&#xA0;</a>Now that I have covered how to define a class and use an object born from that class, I can take the code from <a data-type="xref" href="ch08.html#using_an_object">#using_an_object</a> and <a data-type="xref" href="ch08.html#writing_the_cookie_cutter">#writing_the_cookie_cutter</a> and put them together in one sketch.</p>
+
+  <div data-type="example" id="car_class_and_a_car_object">
+  <h5>A Car class and a Car object</h5>
+<div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>Declare car object as a global variable.</p></div><div class="code">
+
+<pre><code>let myCar;
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+function setup() {
+  createCanvas(200, 200);
+</code></pre></div></div><div class="pair"><div class="comment"><p>Initialize car object in setup() by calling constructor.</p></div><div class="code">
+
+<pre><code>  myCar = new Car();
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>}
+
+function draw() {
+  background(255);
+</code></pre></div></div><div class="pair"><div class="comment"><p>Operate the car object in draw() by calling object methods using the dots syntax.</p></div><div class="code">
+
+<pre><code>  myCar.move();
+  myCar.display();
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>}
+</code></pre></div></div><div class="pair"><div class="comment"><p>Define a class below the rest of the program.</p></div><div class="code">
+
+<pre><code>class Car {
+</code></pre></div></div><div class="pair"><div class="comment"><p>A constructor.</p></div><div class="code">
+
+<pre><code>  constructor() {
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>    this.c = color(255);
+    this.xpos = width/2; Variables.
+    this.ypos = height/2;
+    this.xspeed = 1;
+  }
+</code></pre></div></div><div class="pair"><div class="comment"><p>Function.</p></div><div class="code">
+
+<pre><code>  display() {
+</code></pre></div></div><div class="pair"><div class="comment"><p>The car is just a square</p></div><div class="code">
+
+<pre><code>    rectMode(CENTER);
+    fill(this.c);
+    rect(this.xpos, this.ypos, 20, 10);
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>  }
+</code></pre></div></div><div class="pair"><div class="comment"><p>Function.</p></div><div class="code">
+
+<pre><code>  move() {
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>    this.xpos = this.xpos + this.xspeed;
+    if (this.xpos &gt; width) {
+      this.xpos = 0;
+    }
+  }
+}
+
+</code></pre></div></div></div></div>
+  </div>
+
+  <p>You will notice that the code block that contains the <code>Car</code> class is placed below the main body of the program (under <code>draw()</code>). This spot is identical to where I placed user-defined functions in <a data-type="xref" href="#functions">#functions</a>. Technically speaking, the order does not matter, as long as the blocks of code (contained within curly brackets) remain intact. The <code>Car</code> class could go above <code>setup()</code> or it could even go between <code>setup()</code> and <code>draw()</code>. Though any placement is technically correct, when programming, it&#x2019;s nice to place things where they make the most logical sense to our human brains, the bottom of the code being a good starting point. Nevertheless, web pages offer a useful means for separating blocks of code from each other through the use of separate JS files.</p>
+
+  <p>In the p5.js web editor window, look for the arrow to the left of where it says &quot;sketch.js&quot; to . If you click that triangle, it will reveal the &quot;project-folder&quot; <a data-type="xref" href="ch08.html#fig_08_02_newtab">#fig_08_02_newtab</a>. From the project folder, you&apos;ll need to select the arrow pointing down followed by &quot;Add File.&quot;</p>
+
+  <figure class="no-rule" id="fig_08_02_newtab"><img alt="fig 8.2" src="assets/fig_08_02_newtab.png">
+  <figcaption> </figcaption>
+  </figure>
+
+  <p>Upon selecting &#x201C;Add file,&#x201D; you will be prompted to type in a name for the new file, as shown in <a data-type="xref" href="ch08.html#fig_08_03_newfilename">#fig_08_03_newfilename</a>.</p>
+
+  <figure class="no-rule" id="fig_08_03_newfilename"><img alt="fig 8.3" src="assets/fig_08_03_newfilename.png">
+  <figcaption> </figcaption>
+  </figure>
+
+  <p>Although you can pick any name you like, it&#x2019;s probably a good idea to name the file after the class you intend to put there. You&apos;ll also want to make sure to use the file extension <code>.js</code> You can then put your main code (<code>setup()</code> and <code>draw()</code>) on the original &quot;sketch.js&quot; file in <a data-type="xref" href="ch08.html#fig_08_04_classcodeintab">#fig_08_04_classcodeintab</a>) and type the code for your class in the new one (named &#x201C;car.js&#x201D;).</p>
+
+  <figure class="no-rule" id="fig_08_04_classcodeintab"><img alt="Image" src="assets/fig_08_04_classcodeintab.png">
+  <figcaption> </figcaption>
+  </figure>
+
+  <p>Toggling between the files is simple, just click on the file name in the project folder.
+
+  </p><p>NOTE: ADD HERE A SECTION ABOUT REFERENCING THE FILE IN INDEX.HTML</p>
+
+  <aside class="exercise empty" data-type="sidebar" id="create_a_sketch_with_multiple_tabsdot_tr">
+  <h5><em>Create a sketch with multiple JavaScript files. Try to get the Car example to run without any errors.</em></h5>
+  </aside>
+  </section>
+
+  <section data-type="sect1" id="constructor_arguments">
+  <h1>Constructor arguments</h1>
+
+  <p><a contenteditable="false" data-primary="constructor arguments" data-type="indexterm" id="ch08.html5">&#xA0;</a><a contenteditable="false" data-primary="object(s)" data-secondary="constructor arguments for" data-type="indexterm" id="ch08.html6">&#xA0;</a>In the previous examples, the car object was initialized using the <em>new</em> operator followed by the <em>constructor</em> for the class.</p>
+
+  <div class="codesplit"><div class="pairs"><div class="pair no-comment"><div class="code">
+
+<pre><code>let myCar = new Car();
+</code></pre></div></div></div></div>
+
+  <p>This was a useful simplification while you learned the basics of OOP. Nonetheless, there is a rather serious problem with the above code. What if I wanted to write a program with two car objects?</p>
+
+  <div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>Creating two <code>Car</code> objects.</p></div><div class="code">
+
+<pre><code>let myCar1 = new Car();
+let myCar2 = new Car();
+</code></pre></div></div></div></div>
+
+  <p>This accomplishes my goal; the code will produce two car objects, one stored in the variable myCar1 and one in myCar2. However, if you study the Car class, you will notice that these two cars will be identical: each one will be colored white, start in the middle of the screen, and have a speed of 1. In English, the above reads:</p>
+
+  <ul type="nomark">
+  	<li><p><em>Make a new car.</em></p></li>
+  </ul>
+
+  <p>I want to instead say:</p>
+
+  <ul type="nomark">
+  	<li><p><em>Make a new red car, at location (0,10) with a speed of 1.</em></p></li>
+  </ul>
+
+  <p>So that I could also say:</p>
+
+  <ul type="nomark">
+  	<li><p><em>Make a new blue car, at location (0,100) with a speed of 2.</em></p></li>
+  </ul>
+
+  <p>I can do this by placing arguments inside of the call to the constructor.</p>
+
+  <div class="codesplit"><div class="pairs"><div class="pair no-comment"><div class="code">
+
+<pre><code>let myCar = new Car(color(255, 0, 0), 0, 100, 2);
+</code></pre></div></div></div></div>
+
+  <p>The constructor must be rewritten with parameters to incorporate these arguments:</p>
+
+<div class="codesplit"><div class="pairs"><div class="pair no-comment"><div class="code">
+
+<pre><code>constructor(c, xpos, ypos, xspeed) {
+  this.c = c;
+  this.xpos = xpos;
+  this.ypos = ypos;
+  this.xspeed = speed;
+}
+</code></pre></div></div></div></div>  <p>In my experience, the use of constructor parameters to initialize object variables can be somewhat bewildering. Please don&apos;t blame yourself. The code is strange-looking and can seem awfully redundant: &#x201C;For every single variable I want to initialize in the constructor, I have to duplicate it with a temporary argument to that constructor?&#x201D;</p>
+
+  <p>Nevertheless, this is quite an important skill to learn, and, ultimately, is one of the things that makes object-oriented programming powerful. But for now, it may feel painful. Let&#x2019;s briefly revisit parameter passing again to understand how it works in this context. See <a data-type="xref" href="ch08.html#ch08fig05">#ch08fig05</a>.</p>
+
+  <figure class="no-rule" id="ch08fig05"><img alt="fig 8.5" src="assets/fig_08_06_constructor_args.png">
+  <figcaption> </figcaption>
+  </figure>
+
+  <p>Parameters are local variables used inside the body of a function that get filled with values when the function is called. In the examples, they have <em>one purpose only</em>, to initialize the variables inside of an object. These are the variables that count, the car&#x2019;s actual color, the car&#x2019;s actual x location, and so on. The constructor&#x2019;s arguments<a contenteditable="false" data-primary="temporary arguments" data-type="indexterm">&#xA0;</a> are just <em>temporary</em>, and exist solely to pass a value from where the object is made into the object itself.</p>
+
+  <p>This allows you to make a variety of objects using the same constructor. It&apos;s a little confusing that I&apos;ve given the constructor parameters the same name as the object&apos;s variables. While you might consider writing the word <em>temp</em> in your parameters names to remind you of what is going on (<code>x</code> vs. <code>tempX</code>), it&apos;s pretty common practice to give them the same name. We can distinguish between the constructor&apos;s parameters and the object&apos;s variables by the presence or absence of <code>this.</code>. <code>this.variableName</code> means it&apos;s attached to the object, <code>variableName</code> means it&apos;s a temporary local variable. You can name these whatever you want, of course. However, it&#x2019;s advisable to choose a name that makes sense to you, and also to stay consistent.</p>
+
+  <p>I can now write the same program with multiple object instances, each with unique properties.<a contenteditable="false" data-primary="" data-startref="ch08.html6" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="" data-startref="ch08.html5" data-type="indexterm">&#xA0;</a></p>
+
+  <div data-type="example" id="two_car_objects">
+  <h5>Two Car objects</h5>
+
+  <figure class="float-right" id="ch08fig06"><img alt="Image" src="assets/fig_08_07_twoobjs.png">
+  <figcaption> </figcaption>
+  </figure>
+
+<div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>Two objects!</p></div><div class="code">
+
+<pre><code>let myCar1;
+let myCar2;
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+function setup() {
+  size(200, 200);
+</code></pre></div></div><div class="pair"><div class="comment"><p>Arguments go inside the parentheses when the object is constructed.</p></div><div class="code">
+
+<pre><code>  myCar1 = new Car(color(255, 0, 0), 0, 100, 2);
+  myCar2 = new Car(color(0, 0, 255), 0, 10, 1);
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>}
+
+
+function draw() {
+  background(255);
+</code></pre></div></div><div class="pair"><div class="comment"><p>Even though there are multiple objects, you still only need one class. No matter how many cookies you make, only one cookie cutter is needed. Isn&#x2019;t object-oriented programming swell?</p></div><div class="code">
+
+<pre><code>  myCar1.move();
+  myCar1.display();
+  myCar2.move();
+  myCar2.display();
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>}
+
+
+class Car {
+</code></pre></div></div><div class="pair"><div class="comment"><p>The constructor is defined with parameters.</p></div><div class="code">
+
+<pre><code>  constructor(c, xpos, ypos, xspeed) {
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>    this.c = c;
+    this.xpos = xpos;
+    this.ypos = ypos;
+    this.xspeed = speed;
+  }
+
+  display() {
+    stroke(0);
+    fill(c);
+    rectMode(CENTER);
+    rect(xpos, ypos, 20, 10);
+  }
+
+  move() {
+    xpos = xpos + xspeed;
+    if (xpos &gt; width) {
+      xpos = 0;
+    }
+  }
+
+}
+
+</code></pre></div></div></div></div>  </div>
+
+  <aside class="exercise" data-type="sidebar" id="rewrite_the_gravity_example_from_chapter" style="page-break-inside:auto">
+  <h5><em>Rewrite the gravity example from <a data-type="xref" href="#conditionals">#conditionals</a> using objects with a <code>Ball</code> class.  The original example is included here for your reference with a framework to help you get started. Once you get one object working, make two without changing the class!  Can you add variables for color or size in your class?</em></h5>
+
+
+  <pre data-type="programlisting" class="float-right">
+  <span class="grey-background eight-point margin-right-10">// Simple gravity example
+
+  // (x,y) location
+  let x = 100;
+  let y = 0;
+
+  // Starting speed
+  let speed = 0;
+  // Gravity
+  let gravity = 0.1;
+
+  function setup() {
+    createCanvas(200, 200);
+  }
+
+  function draw() {
+    background(255);
+
+    // Display the circle
+    fill(175);
+    stroke(0);
+    ellipse(x, y, 10, 10);
+
+    // Add speed to y location
+    y = y + speed;
+    // Add gravity to speed
+    speed = speed + gravity;
+
+    // If square reaches the bottom
+    // Reverse speed
+    if (y &gt; height) {
+      speed = speed * -0.95;
+      y = height;
+    }
+  }</span></pre>
+
+  <pre data-type="programlisting">
+
+  _________ __________;
+  let gravity = 0.1;
+
+  void setup() {
+    size(200, 200);
+
+    ball = new _______(50, 0);
+  }
+
+  function draw() {
+    background(255);
+    ball.display();
+
+    __________________________
+  }
+
+
+  _______________ {
+
+
+
+    ______(______,______,______) {
+
+
+      this.x = ______;
+
+      _______________
+
+      this.speed = 0;
+    }
+
+    ___________() {
+
+      _____________________________
+
+      _____________________________
+
+      _____________________________
+    }
+
+    ______________________________
+
+    ______________________________
+
+    ______________________________
+
+    ______________________________
+
+    ______________________________
+
+    ______________________________
+
+    ______________________________
+  }</pre>
+
+  </aside>
+  </section>
+
+  <section data-type="sect1" id="objects_are_data_types_tooexclamation_ma">
+  <h1>Objects are data types too!</h1>
+
+  <p><a contenteditable="false" data-primary="class(es)" data-secondary="as data types" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="data types" data-secondary="objects as" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="object(s)" data-secondary="as data types" data-type="indexterm">&#xA0;</a>This is your first experience with object-oriented programming, so I want to take it easy. The examples in this chapter all use just one class and make, at most, two or three objects from that class. Nevertheless, there are no actual limitations. P5 sketches can include as many classes as you feel like writing. If you were programming the Space Invaders game, for example, you might create a <code>Spaceship</code> class, an <code>Enemy</code> class, and a <code>Bullet</code> class, using an object for each entity in your game.</p>
+
+  <p>In addition, although not <em>primitive</em>, classes are data types just like numbers. And since classes are made up of data, an object can therefore contain other objects! For example, let&#x2019;s assume you had just finished programming a <code>Fork</code> and <code>Spoon</code> class. Moving on to a <code>PlaceSetting</code> class, you would likely include variables for both a <code>Fork</code> object and a <code>Spoon</code> object inside that class itself. This is perfectly reasonable and quite common in object-oriented programming.</p>
+
+<div class="codesplit"><div class="pairs"><div class="pair no-comment"><div class="code">
+
+<pre><code>class PlaceSetting {
+
+ constructor() {
+</code></pre></div></div><div class="pair"><div class="comment"><p>A class can include other objects among its variables.</p></div><div class="code">
+
+<pre><code>   this.fork = new Fork();
+   this.spoon = new Spoon();
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code> }
+}
+</code></pre></div></div></div></div>
+
+  <p class="pagebreak-after">Objects, just like any data type, can also be passed in as arguments to a function. In the Space Invaders game example, if the spaceship shoots the bullet at the enemy, you would probably want to write a function inside the <code>Enemy</code> class to determine if the enemy had been hit by the bullet.</p>
+
+  <!-- TODO: This is pretty hacky way to get comments as regular code -->
+  <div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>A function can have an object as its parameter.</p></div><div class="code">
+
+<pre><code>hit(bullet) {
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code> /<em></em>/ Code to determine if
+ /<em></em>/ the bullet struck the enemy
+}
+</code></pre></div></div></div></div>
+
+  <p>In <a data-type="xref" href="#functions">#functions</a>, I <a contenteditable="false" data-primary="passing by copy (passing by value)" data-type="indexterm">&#xA0;</a>showed how when a number is passed into a function, a copy of the variable is made and the original variable remains the same no matter what happens in the function.  This is known as <em>pass by value</em>. With objects, things work a bit differently. If changes are made to an object after it is passed into a function, those changes will affect the original object.  Instead of copying the object and passing it into the function, a copy of a <em>reference</em> to the object is passed.  You can think of a reference as the address in memory where the object&apos;s data is stored.  So while there are in fact two distinct variables holding on their own value, that value is simply an address pointing to only one object.  Any changes to those object variables affect the same object.</p>
+
+  <figure class="no-rule" id="ch08fig_passingobjects"><img alt="fig 8.8" src="assets/fig_08_08_pass_by.png">
+  <figcaption> </figcaption>
+  </figure>
+
+  <p>As you move forward through this book and the examples become more advanced, you will see examples that I use multiple objects, pass objects into functions, and more. The next chapter, in fact, focuses on how to make lists of objects. And <a data-type="xref" href="#algorithms-id00011">#algorithms-id00011</a> walks through the development of a project that includes multiple classes. For now, as I close out the chapter with Zoog, I will stick with just one class.</p>
+  </section>
+
+  <section data-type="sect1" id="object-oriented_zoog">
+  <h1>Object-oriented Zoog</h1>
+
+  <p><a contenteditable="false" data-primary="object(s)" data-secondary="making a Zoog class" data-type="indexterm">&#xA0;</a><a contenteditable="false" data-primary="Zoog (application example)" data-secondary="with object-oriented programming" data-type="indexterm">&#xA0;</a>Invariably, the question comes up: &#x201C;When should I use object-oriented programming?&#x201D; For me, the answer is <em>always</em>, although now that I&apos;m talking about JavaScript the answer isn&apos;t so clear. The advantage is that objects allow you to organize the concepts inside of a software application into modular, reusable packages. However, there are other approaches like &quot;functional programming.&quot; For simple drawings and animations, objects are very helpful and you will see them again and again throughout the course of this book. However, it&#x2019;s not always convenient or necessary to start out every project using object-orientation, especially while you&#x2019;re learning. p5.js makes it easy to quickly &#x201C;sketch&#x201D; out visual ideas with non object-oriented code.</p>
+
+  <p>For any p5.js project you want to make, my advice is to take a step-by-step approach. You do not need to start out writing classes for everything you want to try to do. Sketch out your idea first by writing code in <code>setup()</code> and <code>draw()</code>. Nail down the logic of what you want to do as well as how you want it to look. As your project begins to grow, take the time to reorganize your code, perhaps first with functions, then with objects. It&#x2019;s perfectly acceptable to dedicate a significant chunk of your time to this reorganization process (often referred<a contenteditable="false" data-primary="refactoring" data-type="indexterm">&#xA0;</a> to as <em>refactoring</em>) without making any changes to the end result, that is, what your sketch looks like and does on screen.</p>
+
+  <p>This is exactly what I have been doing with cosmonaut Zoog from <a data-type="xref" href="#pixels">#pixels</a> until now. I sketched out Zoog&#x2019;s look and experimented with some motion behaviors. Now that I have something, I can take the time to <em>refactor</em> by making Zoog into an object. This process will give you a leg up in programming Zoog&#x2019;s future life in more complex sketches.</p>
+
+  <p>And so it is time to take the plunge and make a <code>Zoog</code> class. Our little Zoog is almost all grown up. The following example is virtually identical to <a data-type="xref" href="#zoog_with_functions">#zoog_with_functions</a> (Zoog with functions) with one major difference. All of the variables and all of the functions are now incorporated into the <code>Zoog</code> class with <code>setup()</code> and <code>draw()</code> containing barely any code.</p>
+
+  <div data-type="example" id="ch08ex03" style="page-break-inside:auto">
+  <h5>Zoog object</h5>
+
+<div class="codesplit"><div class="pairs"><div class="pair"><div class="comment"><p>Zoog is an object!</p></div><div class="code">
+
+<pre><code>let zoog;
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+function setup() {
+  createCanvas(200, 200);
+</code></pre></div></div><div class="pair"><div class="comment"><p>Zoog is given initial properties via the constructor.</p></div><div class="code">
+
+<pre><code>  zoog = new Zoog(100, 125, 60, 60, 16);
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>}
+
+
+function draw() {
+  background(255);
+</code></pre></div></div><div class="pair"><div class="comment"><p>mouseX position determines speed factor</p></div><div class="code">
+
+<pre><code>  let factor = constrain(mouseX / 10, 0, 5);
+</code></pre></div></div><div class="pair"><div class="comment"><p>Zoog can do stuff with functions!</p></div><div class="code">
+
+<pre><code>  zoog.jiggle(factor);
+  zoog.display();
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>}
+
+
+</code></pre></div></div><div class="pair"><div class="comment"><p>Everything about Zoog is contained in this one class. Zoog has properties (location, width, height, eye size) and Zoog has abilities (jiggle, display). </p></div><div class="code">
+
+<pre><code>class Zoog {
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+</code></pre></div></div><div class="pair"><div class="comment"><p>Zoog constructor</p></div><div class="code">
+
+<pre><code>  constructor(x, y, w, h, eyeSize) {
+</code></pre></div></div><div class="pair"><div class="comment"><p>Zoog&apos;s variables</p></div><div class="code">
+
+<pre><code>    this.x = tempX;
+    this.y = tempY;
+    this.w = tempW;
+    this.h = tempH;
+    this.eyeSize = eyeSize;
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>  }
+
+</code></pre></div></div><div class="pair"><div class="comment"><p>Move Zoog</p></div><div class="code">
+
+<pre><code>  jiggle(speed) {
+</code></pre></div></div><div class="pair"><div class="comment"><p>Change the location of Zoog randomly</p></div><div class="code">
+
+<pre><code>    x = x + random(-1, 1)*speed;
+    y = y + random(-1, 1)*speed;
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+</code></pre></div></div><div class="pair"><div class="comment"><p>Constrain Zoog to window</p></div><div class="code">
+
+<pre><code>    x = constrain(x, 0, width);
+    y = constrain(y, 0, height);
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>  }
+
+</code></pre></div></div><div class="pair"><div class="comment"><p>Display Zoog</p></div><div class="code">
+
+<pre><code>  display() {
+</code></pre></div></div><div class="pair"><div class="comment"><p>Set ellipses and rects to CENTER mode</p></div><div class="code">
+
+<pre><code>    ellipseMode(CENTER);
+    rectMode(CENTER);
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+</code></pre></div></div><div class="pair"><div class="comment"><p>Draw Zoog&apos;s arms with a for loop</p></div><div class="code">
+
+<pre><code>    for (let i = y - h/3; i &lt; y + h/2; i += 10) {
+      stroke(0);
+      line(x - w/4, i, x + w/4, i);
+    }
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+</code></pre></div></div><div class="pair"><div class="comment"><p>Draw Zoog&apos;s body</p></div><div class="code">
+
+<pre><code>    stroke(0);
+    fill(175);
+    rect(x, y, w/6, h);
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+</code></pre></div></div><div class="pair"><div class="comment"><p>Draw Zoog&apos;s head</p></div><div class="code">
+
+<pre><code>    stroke(0);
+    fill(255);
+    ellipse(x, y - h, w, h);
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+</code></pre></div></div><div class="pair"><div class="comment"><p>Draw Zoog&apos;s eyes</p></div><div class="code">
+
+<pre><code>    fill(0);
+    ellipse(x - w/3, y - h, eyeSize, eyeSize*2);
+    ellipse(x + w/3, y - h, eyeSize, eyeSize*2);
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>
+</code></pre></div></div><div class="pair"><div class="comment"><p>Draw Zoog&apos;s legs</p></div><div class="code">
+
+<pre><code>    stroke(0);
+    line(x - w/12, y + h/2, x - w/4, y + h/2 + 10);
+    line(x + w/12, y + h/2, x + w/4, y + h/2 + 10);
+</code></pre></div></div><div class="pair no-comment"><div class="code">
+
+<pre><code>  }
+}
+
+</code></pre></div></div></div></div>
+  <figure class="float-right" id="ch08fig07"><img alt="Image" src="assets/fig_08_09_zoog.png">
+  <figcaption> </figcaption>
+  </figure>
+  </div>
+
+  <aside class="exercise empty" data-type="sidebar" id="rewrite_example_8-3_to_include_two_zoogs">
+  <h5><em>Rewrite <a data-type="xref" href="ch08.html#ch08ex03">#ch08ex03</a> to include two Zoogs. Can you vary their appearance? Behavior? Consider adding color as a Zoog variable.</em></h5>
+  </aside>
+
+  <aside class="project" data-type="sidebar" id="lesson_three_project">
+  <h5>Lesson Three Project</h5>
+
+  <ol>
+  		<li>Take your Lesson Two Project and reorganize the code using functions.</li>
+  			<li>Reorganize the code one step further using a class and an object variable.</li>
+  			<li>Add arguments to the Constructor of your class and try making two or three objects with different variables.</li>
+  </ol>
+
+  <p>Use the space provided below to sketch designs, notes, and pseudocode for your project.<a contenteditable="false" data-primary="" data-startref="ch08.html0" data-type="indexterm">&#xA0;</a></p>
+  </aside>
+  </section>
+</section>
+
+<a id="prev-link" href="toc.html">Previous: </a>
+
+    </div>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+      hljs.configure({languages: ["javascript"]});
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
