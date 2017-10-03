@@ -11,5 +11,12 @@
       {{ content }}
       {% include navigation.html %}
     </div>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+      hljs.configure({languages: ["javascript"]});
+      hljs.initHighlightingOnLoad();
+    </script>
   </body>
 </html>

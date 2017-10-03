@@ -1,4 +1,10 @@
 {
+  "addPlugins": [
+    "magicbook-codesplit"
+  ],
+  "codesplit": {
+    "includes": "examples"
+  },
   "title" : "Learning p5.js",
   "files" : [
     "content/toc.html",
