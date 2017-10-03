@@ -234,18 +234,7 @@
 
   <p>Moving beyond pseudocode, the actual body of the sketch might look like:</p>
 
-  <pre data-type="programlisting">
-  let myCar; <span class="callout-bubble pos-1">Variable to hold the object.</span>
-
-  function setup() {
-    myCar = new Car();
-  }
-
-  function draw() {
-    background(255);
-    myCar.move();
-    myCar.display();
-  }</pre>
+  {% codesplit ch08/ex01.js %}
 
   <p>I am going to get into the details regarding the previous code in a moment, but before I do so, let’s take a look at how the <code>Car</code> <em>class</em> itself is written.</p>
   </section>
@@ -297,27 +286,25 @@
 
   <p>
     You might have noticed something a bit strange that changed moving from
-    global variables <code>x</code>, <code>y</code>, etc. On the right of
+    global variables <code>x</code>, <code>y</code>, etc. On the left of
     <a data-type="xref" href='#ch08fig01'>#ch08fig01</a> the variables are
     declated as you might normally expect.
   </p>
-
-  <pre data-type="programlisting">
-  let xpos = width/2;
-  let ypos = height/2;
-  </pre>
+  <!-- TODO -->
+  <pre data-type="programlisting" class="codesplit">
+let xpos = width/2;
+let ypos = height/2;</pre>
 
   <p>
     However, in the constructor function, the variables are declared with a new
     keyword: <code>this</code>.
   </p>
 
-  <pre data-type="programlisting">
-    constructor() {
-      this.xpos = width/2;
-      this.ypos = height/2;
-    }
-  </pre>
+  <pre data-type="programlisting" class="codesplit">
+constructor() {
+  this.xpos = width/2;
+  this.ypos = height/2;
+}</pre>
 
   <p>
     The <code>this</code> keyword is only going to come up again and again in
@@ -378,18 +365,7 @@
 
   <p><a contenteditable="false" data-primary="object(s)" data-secondary="using" data-type="indexterm" id="ch08.html1">&nbsp;</a>In <a data-type="xref" href="#using_an_object">#using_an_object</a>, I took a quick peek at how an object can greatly simplify the main parts of a Processing sketch (<code>setup()</code> and <code>draw()</code>).</p>
 
-  <pre data-type="programlisting">
-  let myCar; <span class="callout-bubble pos-3">Step 1: Declare an object.</span>
-
-  function setup() {
-    myCar = new Car(); <span class="callout-bubble pos-3">Step 2: Initialize object.</span>
-  }
-
-  function draw() {
-    background(255);
-    myCar.move(); <span class="callout-bubble pos-3">Step 3: Call methods on the object.</span>
-    myCar.display();
-  }</pre>
+  {% codesplit ch08/ex02.js %}
 
   <p>Let’s look at the details behind the above three steps outlining how to use an object in your sketch.</p>
 
@@ -398,10 +374,10 @@
 
   <p><a contenteditable="false" data-primary="declaration" data-secondary="of object variable" data-type="indexterm">&nbsp;</a><a contenteditable="false" data-primary="object(s)" data-secondary="declaring variable for" data-type="indexterm">&nbsp;</a><a contenteditable="false" data-primary="variables" data-secondary="declaration" data-type="indexterm">&nbsp;</a>If you flip back to <a data-type="xref" href="#variables">#variables</a>, you may recall that a variable is declared with <em>let</em> followed by a <em>name</em>.</p>
 
-  <pre data-type="programlisting">
-  // Variable declaration
-  // type name
-  let something;   </pre>
+<pre data-type="programlisting" class="codesplit">
+// Variable declaration
+// type name
+let something;   </pre>
 
   <p>Previously we've looked at <a contenteditable="false" data-primary="complex data types" data-type="indexterm">&nbsp;</a><a contenteditable="false" data-primary="primitive values" data-type="indexterm">&nbsp;</a> examples of variables that holds onto <em>primitives</em>, like a number.  Declaring a variable that holds onto an object is the same! Objects, incidentally, are not primitives and are considered <em>complex</em> data types. (This is because they store multiple pieces of information: data and functionality. Primitives only store data.)</p>
   </section>
@@ -411,16 +387,18 @@
 
   <p><a contenteditable="false" data-primary="initialization" data-secondary="of objects" data-type="indexterm">&nbsp;</a><a contenteditable="false" data-primary="object(s)" data-secondary="initializing" data-type="indexterm">&nbsp;</a>Again, you may recall from <a data-type="xref" href="#variables">#variables</a> that in order to initialize a variable (i.e., give it a starting value), I use an assignment operation — <em>variable</em> equals <em>something</em>.</p>
 
-  <pre data-type="programlisting">
-  // Variable Initialization
-  // something equals 10
-  something = 10;   </pre>
+  <h3>Variable Initialization</h3>
+<pre data-type="programlisting" class="codesplit">
+// something equals 10
+something = 10;   </pre>
 
   <p>Initializing an object is a bit more complex. Instead of simply assigning it a primitive value, like an integer or floating point number, you have to construct the object. An object is made with the <code>new</code> operator.</p>
 
-  <pre data-type="programlisting">
-  // Object Initialization
-  myCar = new Car(); <span class="callout-bubble pos-3">The <code>new</code> operator is used to make a new object.</span></pre>
+  <h3>Object Initialization</h3>
+  <pre data-type="programlisting" class="codesplit">
+// The <code>new</code> operator is used to make a new object.
+myCar = new Car();
+  </pre>
 
   <p>In the above <a contenteditable="false" data-primary="constructor(s)" data-type="indexterm">&nbsp;</a>example, <code>myCar</code> is the object variable name and “=” indicates you are setting it equal to something, that something being a <code>new</code> instance of a <code>Car</code> object. What I am really doing here is initializing a <code>Car</code> object. When you initialize a primitive variable, such as an integer, you just set it equal to a number. But an object may contain multiple pieces of data. Recalling the <code>Car</code> class from the previous section, you can see that this line of code calls the <em>constructor</em> tfoot initializes all of the object’s variables and makes sure the <code>Car</code> object is ready to go.</p>
 
@@ -440,9 +418,10 @@
 
   <p>In the case of the car, none of the available functions has an argument so it looks like:<a contenteditable="false" data-primary="" data-startref="ch08.html1" data-type="indexterm">&nbsp;</a></p>
 
-  <pre data-type="programlisting">
-  myCar.draw(); <span class="callout-bubble pos-2">Functions are called with the “dot syntax.”</span>
-  myCar.display();</pre>
+  <pre data-type="programlisting" class="codesplit">
+// Functions are called with the “dot syntax.”
+myCar.draw();
+myCar.display();</pre>
 
   <aside class="exercise" data-type="sidebar" id="assume_the_existence_of_a_human_classdot">
   <h5><em>Assume the existence of a Human class. You want to write the code to declare a Human object as well as call the function</em> <code>sleep()</code> <em>on that human object. Write out the code below:</em></h5>
@@ -462,47 +441,8 @@
 
   <div data-type="example" id="car_class_and_a_car_object">
   <h5>A Car class and a Car object</h5>
+  {% codesplit ch08/ex03.js %}
 
-  <pre data-type="programlisting">
-  let myCar; <span class="callout-bubble pos-5">Declare car object as a global variable.</span>
-
-  function setup() {
-    createCanvas(200, 200);
-
-    // Initialize Car object
-    myCar = new Car(); <span class="callout-bubble pos-5">Initialize car object in <code>setup()</code> by calling constructor.</span>
-  }
-
-  function draw() {
-    background(255);
-    // Operate Car object.
-    myCar.move(); <span class="callout-bubble pos-5">Operate the car object in <code>draw()</code> by calling object methods using the dots syntax.</span>
-    myCar.display();
-  }
-
-  class Car { <span class="callout-bubble pos-5">Define a class below the rest of the program.</span>
-
-    Car() { <span class="callout-bubble pos-5">A constructor.</span>
-      this.c = color(255);
-      this.xpos = width/2; <span class="callout-bubble pos-5">Variables.</span>
-      this.ypos = height/2;
-      this.xspeed = 1;
-    }
-
-    display() { <span class="callout-bubble pos-5">Function.</span>
-      // The car is just a square
-      rectMode(CENTER);
-      fill(this.c);
-      rect(this.xpos, this.ypos, 20, 10);
-    }
-
-    move() { <span class="callout-bubble pos-5">Function.</span>
-      this.xpos = this.xpos + this.xspeed;
-      if (this.xpos &gt; width) {
-        this.xpos = 0;
-      }
-    }
-  }</pre>
   </div>
 
   <p>You will notice that the code block that contains the <code>Car</code> class is placed below the main body of the program (under <code>draw()</code>). This spot is identical to where I placed user-defined functions in <a data-type="xref" href="#functions">#functions</a>. Technically speaking, the order does not matter, as long as the blocks of code (contained within curly brackets) remain intact. The <code>Car</code> class could go above <code>setup()</code> or it could even go between <code>setup()</code> and <code>draw()</code>. Though any placement is technically correct, when programming, it’s nice to place things where they make the most logical sense to our human brains, the bottom of the code being a good starting point. Nevertheless, web pages offer a useful means for separating blocks of code from each other through the use of separate JS files.</p>
@@ -539,14 +479,15 @@
 
   <p><a contenteditable="false" data-primary="constructor arguments" data-type="indexterm" id="ch08.html5">&nbsp;</a><a contenteditable="false" data-primary="object(s)" data-secondary="constructor arguments for" data-type="indexterm" id="ch08.html6">&nbsp;</a>In the previous examples, the car object was initialized using the <em>new</em> operator followed by the <em>constructor</em> for the class.</p>
 
-  <pre data-type="programlisting">
-  let myCar = new Car();</pre>
+  <pre data-type="programlisting" class="codesplit">
+let myCar = new Car();</pre>
 
   <p>This was a useful simplification while you learned the basics of OOP. Nonetheless, there is a rather serious problem with the above code. What if I wanted to write a program with two car objects?</p>
 
-  <pre data-type="programlisting">
-  let myCar1 = new Car();<span class = "callout-bubble pos-3">Creating two <code>Car</code> objects.</span>
-  let myCar2 = new Car();</pre>
+  <pre data-type="programlisting" class="codesplit">
+// Creating two <code>Car</code> objects.
+let myCar1 = new Car();
+let myCar2 = new Car();</pre>
 
   <p>This accomplishes my goal; the code will produce two car objects, one stored in the variable myCar1 and one in myCar2. However, if you study the Car class, you will notice that these two cars will be identical: each one will be colored white, start in the middle of the screen, and have a speed of 1. In English, the above reads:</p>
 
@@ -568,19 +509,12 @@
 
   <p>I can do this by placing arguments inside of the call to the constructor.</p>
 
-  <pre data-type="programlisting">
-  let myCar = new Car(color(255, 0, 0), 0, 100, 2);</pre>
+  <pre data-type="programlisting" class="codesplit">
+let myCar = new Car(color(255, 0, 0), 0, 100, 2);</pre>
 
   <p>The constructor must be rewritten with parameters to incorporate these arguments:</p>
 
-  <pre data-type="programlisting">
-  Car(c, xpos, ypos, xspeed) {
-    this.c = c;
-    this.xpos = xpos;
-    this.ypos = ypos;
-    this.xspeed = xspeed;
-  }</pre>
-
+  {% codesplit ch08/ex04.js lines:"27-32" %}
   <p>In my experience, the use of constructor parameters to initialize object variables can be somewhat bewildering. Please don't blame yourself. The code is strange-looking and can seem awfully redundant: “For every single variable I want to initialize in the constructor, I have to duplicate it with a temporary argument to that constructor?”</p>
 
   <p>Nevertheless, this is quite an important skill to learn, and, ultimately, is one of the things that makes object-oriented programming powerful. But for now, it may feel painful. Let’s briefly revisit parameter passing again to understand how it works in this context. See <a data-type="xref" href="#ch08fig05">#ch08fig05</a>.</p>
@@ -602,51 +536,7 @@
   <figcaption> </figcaption>
   </figure>
 
-  <pre data-type="programlisting">
-  let myCar1; <span class="callout-bubble pos-1">Two objects!</span>
-  let myCar2;
-
-  function setup() {
-    size(200, 200);
-
-    myCar1 = new Car(color(255, 0, 0), 0, 100, 2);
-    myCar2 = new Car(color(0, 0, 255), 0, 10, 1); <span class="callout-bubble pos-4 width-2 below">Arguments go inside the parentheses when the object is constructed.</span>
-  }
-
-
-  function draw() {
-    background(255);
-    myCar1.move();
-    myCar1.display();
-    myCar2.move(); <span class="callout-bubble pos-4 width-5">Even though there are multiple objects, you still only need one class. No matter how many cookies you make, only one cookie cutter is needed. Isn’t object-oriented programming swell?</span>
-    myCar2.display();
-  }
-
-
-  class Car {
-
-    Car(c, xpos, ypos, xspeed) { <span class="callout-bubble pos-4 below width-5">The constructor is defined with parameters.</span>
-      this.c = c;
-      this.xpos = xpos;
-      this.ypos = ypos;
-      this.xspeed = speed;
-    }
-
-    display() {
-      stroke(0);
-      fill(c);
-      rectMode(CENTER);
-      rect(xpos, ypos, 20, 10);
-    }
-
-    move() {
-      xpos = xpos + xspeed;
-      if (xpos &gt; width) {
-        xpos = 0;
-      }
-    }
-
-  }</pre>
+  {% codesplit ch08/ex04.js %}
   </div>
 
   <aside class="exercise" data-type="sidebar" id="rewrite_the_gravity_example_from_chapter" style="page-break-inside:auto">
@@ -757,22 +647,25 @@
 
   <p>In addition, although not <em>primitive</em>, classes are data types just like numbers. And since classes are made up of data, an object can therefore contain other objects! For example, let’s assume you had just finished programming a <code>Fork</code> and <code>Spoon</code> class. Moving on to a <code>PlaceSetting</code> class, you would likely include variables for both a <code>Fork</code> object and a <code>Spoon</code> object inside that class itself. This is perfectly reasonable and quite common in object-oriented programming.</p>
 
-  <pre data-type="programlisting">
-  class PlaceSetting {
+<pre data-type="programlisting" class="codesplit">
+class PlaceSetting {
 
-    constructor() {
-      this.fork = new Fork();  <span class="callout-bubble pos-2">A class can include other objects among its variables.</span>
-      this.spoon = new Spoon();
-    }
-  }</pre>
+  constructor() {
+    // A class can include other objects among its variables. {!2}
+    this.fork = new Fork();
+    this.spoon = new Spoon();
+  }
+}</pre>
 
   <p class="pagebreak-after">Objects, just like any data type, can also be passed in as arguments to a function. In the Space Invaders game example, if the spaceship shoots the bullet at the enemy, you would probably want to write a function inside the <code>Enemy</code> class to determine if the enemy had been hit by the bullet.</p>
 
-  <pre data-type="programlisting">
-  hit(bullet) { <span class="callout-bubble">A function can have an object as its parameter.</span>
-    // Code to determine if
-    // the bullet struck the enemy
-  }</pre>
+  <!-- TODO: This is pretty hacky way to get comments as regular code -->
+  <pre data-type="programlisting" class="codesplit">
+// A function can have an object as its parameter. {!1}
+hit(bullet) {
+  /<em></em>/ Code to determine if
+  /<em></em>/ the bullet struck the enemy
+}</pre>
 
   <p>In <a data-type="xref" href="#functions">#functions</a>, I <a contenteditable="false" data-primary="passing by copy (passing by value)" data-type="indexterm">&nbsp;</a>showed how when a number is passed into a function, a copy of the variable is made and the original variable remains the same no matter what happens in the function.  This is known as <em>pass by value</em>. With objects, things work a bit differently. If changes are made to an object after it is passed into a function, those changes will affect the original object.  Instead of copying the object and passing it into the function, a copy of a <em>reference</em> to the object is passed.  You can think of a reference as the address in memory where the object's data is stored.  So while there are in fact two distinct variables holding on their own value, that value is simply an address pointing to only one object.  Any changes to those object variables affect the same object.</p>
 
@@ -797,86 +690,11 @@
   <div data-type="example" id="ch08ex03" style="page-break-inside:auto">
   <h5>Zoog object</h5>
 
-  <pre data-type="programlisting">
-  let zoog; <span class="callout-bubble pos-1">Zoog is an object!</span>
-
-  function setup() {
-    createCanvas(200, 200);
-    zoog = new Zoog(100, 125, 60, 60, 16); <span class="callout-bubble pos-8 width-4">Zoog is given initial properties via the constructor.</span>
-  }
-
-
-  function draw() {
-    background(255);
-    // mouseX position determines speed factor
-    let factor = constrain(mouseX / 10, 0, 5);
-    zoog.jiggle(factor); <span class="callout-bubble pos-2 below">Zoog can do stuff with functions!</span>
-    zoog.display();
-  }
-
-
-
-  class Zoog {<span class="callout-bubble pos-4 width-7">Everything about Zoog is contained in this one class. Zoog has properties (location, width, height, eye size) and Zoog has abilities (jiggle, display).</span>
-
-    // Zoog constructor
-    Zoog(x, y, w, h, eyeSize) {
-      // Zoog's variables
-      this.x = tempX;
-      this.y = tempY;,
-      this.w = tempW;
-      this.h = tempH;
-      this.eyeSize = eyeSize;
-    }
-
-    // Move Zoog
-    jiggle(speed) {
-      // Change the location of Zoog randomly
-      x = x + random(-1, 1)*speed;
-      y = y + random(-1, 1)*speed;
-
-      // Constrain Zoog to window
-      x = constrain(x, 0, width);
-      y = constrain(y, 0, height);
-    }
-
-    // Display Zoog
-    display() {
-      // Set ellipses and rects to CENTER mode
-      ellipseMode(CENTER);
-      rectMode(CENTER);
-
-      // Draw Zoog's arms with a for loop
-      for (float i = y - h/3; i &lt; y + h/2; i += 10) {
-        stroke(0);
-        line(x - w/4, i, x + w/4, i);
-      }</pre>
+  {% codesplit ch08/zoog.js %}
 
   <figure class="float-right" id="ch08fig07"><img alt="Image" src="fig_08_09_zoog.png"/>
   <figcaption> </figcaption>
   </figure>
-
-  <pre data-type="programlisting">
-      // Draw Zoog's body
-      stroke(0);
-      fill(175);
-      rect(x, y, w/6, h);
-
-      // Draw Zoog's head
-      stroke(0);
-      fill(255);
-      ellipse(x, y - h, w, h);
-
-      // Draw Zoog's eyes
-      fill(0);
-      ellipse(x - w/3, y - h, eyeSize, eyeSize*2);
-      ellipse(x + w/3, y - h, eyeSize, eyeSize*2);
-
-      // Draw Zoog's legs
-      stroke(0);
-      line(x - w/12, y + h/2, x - w/4, y + h/2 + 10);
-      line(x + w/12, y + h/2, x + w/4, y + h/2 + 10);
-    }
-  }</pre>
   </div>
 
   <aside class="exercise empty" data-type="sidebar" id="rewrite_example_8-3_to_include_two_zoogs">

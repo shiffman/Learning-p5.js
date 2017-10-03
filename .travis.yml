@@ -3,6 +3,7 @@ node_js:
   - "8.1"
 before_script:
   - npm install -g magicbook
+  - npm install magicbook-codesplit
 script:
   - magicbook build
 deploy:
